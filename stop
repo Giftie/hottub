@@ -1,0 +1,1 @@
+kill `cat /var/run/hottub.pid`

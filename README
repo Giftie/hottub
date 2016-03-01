@@ -1,0 +1,11 @@
+   raspberrypi Hot Tub Controller
+   https://github.com/tedhale/hottub.git
+
+requirements:
+  wiringPi library  ( go to  http://wiringpi.com/ for more info )
+  
+to build:
+  make clean
+  make 
+
+
