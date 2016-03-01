@@ -19,7 +19,8 @@
 
 #define EMAIL_PORT 25
 
-#define MTA "smtp.east.cox.net"
+// You will need to set the address for your mail (SMTP) server here
+#define MTA "smtp.yourprovider.com"
 
 /****************************************************************************/
 
