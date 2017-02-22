@@ -83,9 +83,11 @@ void readConfig(char *fname)
 	FILE *f;
 	
 	ReadConfigString("debug","0",temp,sizeof(temp),fname);
-	debug = atoi(temp);	
+	debug = atoi(temp);
 	ReadConfigString("waterSensorID","",waterSensorID,sizeof(waterSensorID),fname);
 	ReadConfigString("heaterSensorID","",heaterSensorID,sizeof(heaterSensorID),fname);
+	ReadConfigString("outdoorSensorID","",outdoorSensorID,sizeof(outdoorSensorID),fname);
+	ReadConfigString("equipSensorID","",equipmentSensorID,sizeof(equipSensorID),fname);
 	ReadConfigString("maxHeaterTemp","106.5",temp,sizeof(temp),fname);
 	maxHeaterTemp = atof(temp);
 	ReadConfigString("maxDesired","109.5",temp,sizeof(temp),fname);
@@ -117,6 +119,8 @@ void readConfig(char *fname)
 	{
 		if (strlen(waterSensorID)<=0) strcpy(waterSensorID,temp);
 		if (strlen(heaterSensorID)<=0) strcpy(heaterSensorID,temp);
+		if (strlen(outdoorSensorID)<=0) strcpy(outdoorSensorID,temp);
+		if (strlen(equipSensorID)<=0) strcpy(equipSensorID,temp);
 	}
 }
 

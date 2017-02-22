@@ -2,6 +2,8 @@
 # uncomment and change to desired sensor ID, will use first ID found otherwise
 ###waterSensorID=28-00000728bb54
 ###heaterSensorID=28-00000728bb54
+###outdoorSensorID=28-00000728bb54
+###equipSensorID=28-00000728bb54
 
 # allowed temperature range
 ###maxDesired=109.5

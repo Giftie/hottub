@@ -166,10 +166,38 @@ void *TempThread(void *param)
 {
 	double lastTemp = -123.456;
 	double lastHeaterTemp = -123.456;
+	double lastoutdoorTemp = -123.456;
+	double lastequipmentTemp = -123.456;
 	char tmp[80];
 	
 	do
-	{		
+	{	
+		// read outdoor temperature
+		LogDbg("TempThread> read outdoor temperature");
+		getTemperature(outdoorSensorID,&outdoorTemp);
+
+		//ignore spurious data
+		if (isSpurious(&outdoorTemp,&lastoutdoorTemp))
+		{
+			sprintf(tmp,"TempThread> ignore spurious current temp: %6.1f",outdoorTemp);
+			Log(tmp);
+			outdoorTemp = lastoutdoorTemp;
+		}
+		lastoutdoorTemp = outdoorTemp;
+		
+		// read equipment temperature
+		LogDbg("TempThread> read equipment temperature");
+		getTemperature(equipSensorID,&equipmentTemp);
+		
+		//ignore spurious data
+		if (isSpurious(&equipmentTemp,&lastequipmentTemp))
+		{
+			sprintf(tmp,"TempThread> ignore spurious current temp: %6.1f",equipmentTemp);
+			Log(tmp);
+			outequipmentTemp = lastequipmentTemp;
+		}
+		lastequipmentTemp = equipmentTemp;
+		
 		// read water temperature
 		LogDbg("TempThread> read water temperature");
 		getTemperature(waterSensorID,&currentTemp);
@@ -222,8 +250,10 @@ void *HotTubLogic(void *param)
 		
 	// start polling loop
 	Log("HotTubLogic> start polling loop.");
-	Log("HotTubLogic> Sensor ID is %s",waterSensorID);
+	Log("HotTubLogic> Water Sensor ID is %s",waterSensorID);
 	Log("HotTubLogic> Heater ID is %s",heaterSensorID);
+	Log("HotTubLogic> Outdoor Sensor ID is %s",outdoorSensorID);
+	Log("HotTubLogic> Equipment ID is %s",equipSensorID);
     do
     {
 		time(&now);
@@ -240,6 +270,12 @@ void *HotTubLogic(void *param)
 		{
 			sprintf(tmp,"%f",currentTemp);
 			UpdateThingSpeak(ThingSpeakAPIkey, "field1", tmp);
+			sprintf(tmp,"%f",heaterTemp);
+			UpdateThingSpeak(ThingSpeakAPIkey, "field2", tmp);
+			sprintf(tmp,"%f",outdoorTemp);
+			UpdateThingSpeak(ThingSpeakAPIkey, "field3", tmp);
+			sprintf(tmp,"%f",equipmentTemp);
+			UpdateThingSpeak(ThingSpeakAPIkey, "field4", tmp);			
 			time(&lastPost);
 		}
 		

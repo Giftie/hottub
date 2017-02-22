@@ -59,10 +59,14 @@ long long int getTicks();
 EXTERN int			kicked;						// flag for shutdown or restart
 EXTERN int 			debug;						// flag to allow debug log output
 EXTERN char 		waterSensorID[32];			// 1-wire device ID for water temp 
-EXTERN char 		heaterSensorID[32];			// 1-wire device ID for heater temp 
+EXTERN char 		heaterSensorID[32];			// 1-wire device ID for heater temp
+EXTERN char			equipSensorID[32];          // 1-wire device ID for equipment temp
+EXTERN char         outdoorSensorID[32];        // 1-wire device ID for outdoor temp
 EXTERN double 		desiredTemp;				// where I want the water to be
 EXTERN double 		currentTemp;				// where the water is now
 EXTERN double 		heaterTemp;					// temperature in the heater
+EXTERN double		equipmentTemp;              // equipment temperature
+EXTERN double		outdoorTemp;                // Outdoor temperature
 EXTERN double 		maxHeaterTemp;				// fail temperature of the heater
 EXTERN double 		slopTemp;					// prevents constant "seeking"
 EXTERN double 		maxDesired;					// highest allowed setting
