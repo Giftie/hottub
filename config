@@ -1,3 +1,8 @@
+ThingSpeakAPIkey=XRIUDADZK1TI8OE6
+NoticeToAddress=youremail@blah.com
+NoticeFromAddress=youremail@blah.com
+MTA=smtp.yourserver.com
+#
 # 1-wire sensor IDs
 # uncomment and change to desired sensor ID, will use first ID found otherwise
 ###waterSensorID=28-00000728bb54
@@ -6,14 +11,14 @@
 ###equipSensorID=28-00000728bb54
 
 # allowed temperature range
-###maxDesired=109.5
-###minDesired=100.5
+maxDesired=109.5
+minDesired=100.5
 
 # over temp shutdown for heater temp
-###maxHeaterTemp=135.0
+maxHeaterTemp=135.0
 
 # how acurate to keep temperature. Too small a value and it will cycle a lot
-###slopTemp=0.5
+slopTemp=0.5
 
 # circulation pump cycle times
 pumpOnFor=15

@@ -58,6 +58,10 @@ long long int getTicks();
 // simultaneous access from multiple threads
 EXTERN int			kicked;						// flag for shutdown or restart
 EXTERN int 			debug;						// flag to allow debug log output
+EXTERN char         ThingSpeakAPIkey[32];       // 
+EXTERN char         NoticeToAddress[32];
+EXTERN char         NoticeFromAddress[32];
+EXTERN char         MTA[32];
 EXTERN char 		waterSensorID[32];			// 1-wire device ID for water temp 
 EXTERN char 		heaterSensorID[32];			// 1-wire device ID for heater temp
 EXTERN char			equipSensorID[32];          // 1-wire device ID for equipment temp
