@@ -194,7 +194,7 @@ void *TempThread(void *param)
 		{
 			sprintf(tmp,"TempThread> ignore spurious current temp: %6.1f",equipmentTemp);
 			Log(tmp);
-			outequipmentTemp = lastequipmentTemp;
+			equipmentTemp = lastequipmentTemp;
 		}
 		lastequipmentTemp = equipmentTemp;
 		
