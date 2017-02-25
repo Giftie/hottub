@@ -91,7 +91,7 @@ void readConfig(char *fname)
 	ReadConfigString("waterSensorID","",waterSensorID,sizeof(waterSensorID),fname);
 	ReadConfigString("heaterSensorID","",heaterSensorID,sizeof(heaterSensorID),fname);
 	ReadConfigString("outdoorSensorID","",outdoorSensorID,sizeof(outdoorSensorID),fname);
-	ReadConfigString("equipSensorID","",equipmentSensorID,sizeof(equipSensorID),fname);
+	ReadConfigString("equipSensorID","",equipSensorID,sizeof(equipSensorID),fname);
 	ReadConfigString("maxHeaterTemp","106.5",temp,sizeof(temp),fname);
 	maxHeaterTemp = atof(temp);
 	ReadConfigString("maxDesired","109.5",temp,sizeof(temp),fname);
