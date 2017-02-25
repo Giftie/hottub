@@ -85,8 +85,8 @@ void readConfig(char *fname)
 	ReadConfigString("debug","0",temp,sizeof(temp),fname);
 	debug = atoi(temp);
 	ReadConfigString("ThingSpeakAPIkey","",ThingSpeakAPIkey,sizeof(ThingSpeakAPIkey),fname);
-	ReadConfigString("NotifyToAddress","",NotifyToAddress,sizeof(NotifyToAddress),fname);
-	ReadConfigString("NotifyFromAddress","",NotifyFromAddress,sizeof(NotifyFromAddress),fname);
+	ReadConfigString("NoticeToAddress","",NoticeToAddress,sizeof(NoticeToAddress),fname);
+	ReadConfigString("NoticeFromAddress","",NoticeFromAddress,sizeof(NoticeFromAddress),fname);
 	ReadConfigString("MTA","",MTA,sizeof(MTA),fname);
 	ReadConfigString("waterSensorID","",waterSensorID,sizeof(waterSensorID),fname);
 	ReadConfigString("heaterSensorID","",heaterSensorID,sizeof(heaterSensorID),fname);
