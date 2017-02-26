@@ -46,9 +46,10 @@ second line will end with t=12345    milli degrees C
 #define ThingSpeakAPIkey "ABCDEFG123456789"
 
 #put your own To and From addresses for notifications
-#define NoticeToAddress "you@mailaddress.com"
-#define NoticeFromAddress "you@mailaddress.com"
 */
+#define NoticeToAddress "giftie61@gmail.com"
+#define NoticeFromAddress "giftie@shaw.ca"
+
 int sendSimpleMail( char *toaddr, char *fromaddr, char *subject, char *body);
 int UpdateThingSpeak(char *api_key, char *field_name, char *value);
 
