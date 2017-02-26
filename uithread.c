@@ -21,7 +21,7 @@
 #include <time.h>
 #include <wiringPi.h>
 
-#include "TBH_LED7Backpack.h"
+//#include "TBH_LED7Backpack.h"
 #include "hottub.h"
 
 static time_t tButPressTime;	// to timeout desired temp display
@@ -139,7 +139,7 @@ void setupGPIO()
 	piUnlock(0);
 
 	// open the LED display
-	TBH_LED7_Open(0x70);
+//	TBH_LED7_Open(0x70);
 }
 
 //**************************************************************************
@@ -197,9 +197,9 @@ void LEDoutput(char *s)
     today = localtime(&now);
 	if ((today->tm_hour>21)||(today->tm_hour<6))
 	{
-		TBH_LED7_Show("   ");
+	//	TBH_LED7_Show("   ");
 	} else {
-		TBH_LED7_Show(s);
+	//	TBH_LED7_Show(s);
 	}
 }
 
@@ -220,12 +220,12 @@ void *UiThread(void *param)
 		if (!tButPressTime)
 		{
 			sprintf(tmp,"%4.1f",currentTemp);
-			LEDoutput(tmp);	
+/*			LEDoutput(tmp);	*/
 		}
 		else
 		{
 			sprintf(tmp,"%4.1f",desiredTemp);
-			LEDoutput(tmp);	
+/*			LEDoutput(tmp);	*/
 			// timeout showing desired temp
 			time(&now);
 			if ((now-tButPressTime)>1)
@@ -241,7 +241,7 @@ void *UiThread(void *param)
 		Sleep(1000);
 	}
 	// quitting, clear display and stop blinking
-	TBH_LED7_Show("----");
-	TBH_LED7_blinkRate(0);
+/*	TBH_LED7_Show("----");
+	TBH_LED7_blinkRate(0); */
 	Log("UiThread> thread exiting");
 }
