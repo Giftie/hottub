@@ -20,7 +20,7 @@
 #define EMAIL_PORT 25
 
 // You will need to set the address for your mail (SMTP) server here
-#define MTA "smtp.yourprovider.com"
+//#define MTA "smtp.yourprovider.com"
 
 /****************************************************************************/
 

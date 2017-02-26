@@ -82,8 +82,8 @@ void readConfig(char *fname)
 	char temp[80];
 	FILE *f;
 	
-	//ReadConfigString("debug","0",temp,sizeof(temp),fname);
-	//debug = atoi(temp);
+	ReadConfigString("debug","0",temp,sizeof(temp),fname);
+	debug = atoi(temp);
 	ReadConfigString("ThingSpeakAPIkey","",ThingSpeakAPIkey,sizeof(ThingSpeakAPIkey),fname);
 	ReadConfigString("NoticeToAddress","",NoticeToAddress,sizeof(NoticeToAddress),fname);
 	ReadConfigString("NoticeFromAddress","",NoticeFromAddress,sizeof(NoticeFromAddress),fname);
@@ -170,25 +170,21 @@ int main(int argc, char *argv[])
 		// child will then have no controlling terminals, 
 		// and will become adopted by the init proccess.
 		if ((pid = fork()) < 0) {
-			printf("Error forking process\n");
 			perror("Error forking process ");
 			exit (-1);
 		}
 		else if (pid != 0) {
-			printf("Exiting\n");
 			exit (0);  // parent process goes bye bye
 		}
 
 		// The child process continues from here
 		setsid();  // Become session leader;
 	}
-    printf("trapping some signals\n");
-	// trap some signals 
+    // trap some signals 
 	signal(SIGTERM, sig_handler);
     signal(SIGINT, sig_handler);
     signal(SIGPWR, sig_handler);
     signal(SIGHUP, sig_handler);
-    printf("saving pid in a file\n");
     // save the pid in a file
 	pid = getpid();
 	f = fopen(PIDFILE,"w");
@@ -196,11 +192,9 @@ int main(int argc, char *argv[])
 		fprintf(f,"%d",pid);
 		fclose(f);
 	}
-    printf("opening debug log\n");
-	// open the debug log
+    // open the debug log
 	LogOpen("~/hottub.log");
-    printf("reading config file\n");
-	// read config values
+    // read config values
 	readConfig(CONFIGFILE);
 	
 	// start the main loop
