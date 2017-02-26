@@ -263,9 +263,7 @@ void *HotTubLogic(void *param)
 
 		if (showOutput)
 		{
-			sprintf(tmp,"HotTubLogic> water: %6.1f   heater: %6.1f",currentTemp,heaterTemp);
-			Log(tmp);
-			sprintf(tmp,"HotTubLogic> outdoor: %6.1f   Equipment: %6.1f",outdoorTemp,equipmentTemp);
+			sprintf(tmp,"HotTubLogic> water: %6.1f   heater: %6.1f	   outdoor: %6.1f   Equipment: %6.1f",currentTemp,heaterTemp,outdoorTemp,equipmentTemp);
 			Log(tmp);
 		}
 

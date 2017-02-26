@@ -11,6 +11,9 @@ MTA=smtp.yourserver.com
 ###outdoorSensorID=28-00000728bb54
 ###equipSensorID=28-00000728bb54
 
+# Minimum equipment temperature to issue email warning for Freezing
+minEquipmentTemp=40
+
 # allowed temperature range
 maxDesired=109.5
 minDesired=100.5
