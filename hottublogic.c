@@ -282,6 +282,22 @@ void *HotTubLogic(void *param)
 			time(&lastPost);
 		}
 		
+		// check for equipment freeze warning
+		if (equipmentTemp<minEquipmentTemp)
+		{
+			if (strcmp(failMessage,"OK")==0)
+			{
+				strcpy(failMessage,"Equipment Freeze Waring");
+				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning ****** %6.1f",equipmentTemp);
+				Log(tmp);
+				sendSimpleMail(MTA,
+						NoticeToAddress, 
+						NoticeFromAddress, 
+						"Equipment Freeze Warning", 
+						tmp);
+				//TBH_LED7_blinkRate(1);
+			}
+		}
 		// check for over-temp on heater
 		if (heaterTemp>maxHeaterTemp)
 		{

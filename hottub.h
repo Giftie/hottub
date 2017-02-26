@@ -71,6 +71,7 @@ EXTERN double 		currentTemp;				// where the water is now
 EXTERN double 		heaterTemp;					// temperature in the heater
 EXTERN double		equipmentTemp;              // equipment temperature
 EXTERN double		outdoorTemp;                // Outdoor temperature
+EXTERN double       minEquipmentTemp;           // Minimum Equipment Temperature to issue Freeze Warning
 EXTERN double 		maxHeaterTemp;				// fail temperature of the heater
 EXTERN double 		slopTemp;					// prevents constant "seeking"
 EXTERN double 		maxDesired;					// highest allowed setting
