@@ -188,7 +188,7 @@ int main(int argc, char *argv[])
     signal(SIGINT, sig_handler);
     signal(SIGPWR, sig_handler);
     signal(SIGHUP, sig_handler);
-
+    printf("saving pid in a file\n");
     // save the pid in a file
 	pid = getpid();
 	f = fopen(PIDFILE,"w");
@@ -196,7 +196,7 @@ int main(int argc, char *argv[])
 		fprintf(f,"%d",pid);
 		fclose(f);
 	}
-     
+    printf("opening debug log\n");
 	// open the debug log
 	LogOpen("/opt/projects/logs/hottub");
 
