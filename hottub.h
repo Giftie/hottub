@@ -9,8 +9,8 @@
 ---------------------------------------------------------------------------*/
 
 #define PIDFILE "/var/run/hottub.pid"
-#define CONFIGFILE "./config"
-#define DESIREDTEMPFILE "./desiredtemp"
+#define CONFIGFILE "~/hottub/config"
+#define DESIREDTEMPFILE "~/hottub/desiredtemp"
 #define MYPORT 17200
 #define MAXCONNECTIONS 10
 
