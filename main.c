@@ -170,17 +170,19 @@ int main(int argc, char *argv[])
 		// child will then have no controlling terminals, 
 		// and will become adopted by the init proccess.
 		if ((pid = fork()) < 0) {
+			printf("Error forking process\n");
 			perror("Error forking process ");
 			exit (-1);
 		}
 		else if (pid != 0) {
+			printf("Exiting\n");
 			exit (0);  // parent process goes bye bye
 		}
 
 		// The child process continues from here
 		setsid();  // Become session leader;
 	}
-
+    printf("trapping some signals\n");
 	// trap some signals 
 	signal(SIGTERM, sig_handler);
     signal(SIGINT, sig_handler);
@@ -194,7 +196,7 @@ int main(int argc, char *argv[])
 		fprintf(f,"%d",pid);
 		fclose(f);
 	}
-
+     
 	// open the debug log
 	LogOpen("/opt/projects/logs/hottub");
 
