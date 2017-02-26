@@ -82,8 +82,8 @@ void readConfig(char *fname)
 	char temp[80];
 	FILE *f;
 	
-	ReadConfigString("debug","0",temp,sizeof(temp),fname);
-	debug = atoi(temp);
+	//ReadConfigString("debug","0",temp,sizeof(temp),fname);
+	//debug = atoi(temp);
 	ReadConfigString("ThingSpeakAPIkey","",ThingSpeakAPIkey,sizeof(ThingSpeakAPIkey),fname);
 	ReadConfigString("NoticeToAddress","",NoticeToAddress,sizeof(NoticeToAddress),fname);
 	ReadConfigString("NoticeFromAddress","",NoticeFromAddress,sizeof(NoticeFromAddress),fname);
