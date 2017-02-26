@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 	}
     printf("opening debug log\n");
 	// open the debug log
-	LogOpen("/opt/projects/logs/hottub");
+	LogOpen("~/hottub.log");
 
 	// read config values
 	readConfig(CONFIGFILE);
