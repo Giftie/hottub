@@ -119,6 +119,7 @@ void Log(char *format, ... )
 	vfprintf (logfp, format, arglist );
 	//if (format[strlen(format)-1]<' ')
 		//format[strlen(format)-1] = 0;
+	printf(logfp);
 	fprintf(logfp,"\r\n");
 	fflush ( logfp );
 }
@@ -150,6 +151,7 @@ void LogDbg(char *format, ... )
 	vfprintf (logfp, format, arglist );
 	//if (format[strlen(format)-1]<' ')
 		//format[strlen(format)-1] = 0;
+	printf(logfp);
 	fprintf(logfp,"\r\n");
 	fflush ( logfp );
 }
