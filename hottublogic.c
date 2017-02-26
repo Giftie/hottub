@@ -293,8 +293,8 @@ void *HotTubLogic(void *param)
 				sendSimpleMail(NoticeToAddress, 
 						NoticeFromAddress, 
 						"Hottub Fail", 
-						"Heater over temp!\n");
-				TBH_LED7_blinkRate(1);
+						tmp);
+				//TBH_LED7_blinkRate(1);
 			}
 		}
 		

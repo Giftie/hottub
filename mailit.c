@@ -18,6 +18,8 @@
 #include <arpa/inet.h>
 
 #define EMAIL_PORT 25
+#define NoticeToAddress "giftie61@gmail.com"
+#define NoticeFromAddress "giftie@shaw.ca"
 
 // You will need to set the address for your mail (SMTP) server here
 #define MTA "imap.shaw.ca"

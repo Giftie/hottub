@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
 		fclose(f);
 	}
     // open the debug log
-	LogOpen("~/hottub.log");
+	LogOpen("/opt/projects/logs/hottub");
     // read config values
 	readConfig(CONFIGFILE);
 	
