@@ -51,7 +51,7 @@ int ReadConfigString(char *var, char *defaultVal, char *out, int sz, char *file)
 int WriteConfigString(char *var, char *out, char *file);
 void Log(char *format, ... );
 void LogDbg(char *format, ... );
-int sendSimpleMail( char *toaddr, char *fromaddr, char *subject, char *body);
+int sendSimpleMail( char *eserver, char *toaddr, char *fromaddr, char *subject, char *body);
 long long int getTicks();
 
 // GLOBAL variables.  A lock needs to be used to prevent any 
