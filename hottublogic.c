@@ -50,7 +50,7 @@ second line will end with t=12345    milli degrees C
 #define NoticeFromAddress "giftie@shaw.ca"
 */
 
-int sendSimpleMail( char *toaddr, char *fromaddr, char *subject, char *body);
+int sendSimpleMail( char *eserver, char *toaddr, char *fromaddr, char *subject, char *body);
 int UpdateThingSpeak(char *api_key, char *field_name, char *value);
 
 double BADTEMP = 999.0;
@@ -252,9 +252,9 @@ void *HotTubLogic(void *param)
 	// start polling loop
 	Log("HotTubLogic> start polling loop.");
 	Log("HotTubLogic> Water Sensor ID is %s",waterSensorID);
-	Log("HotTubLogic> Heater ID is %s",heaterSensorID);
+	Log("HotTubLogic> Heater Sensor ID is %s",heaterSensorID);
 	Log("HotTubLogic> Outdoor Sensor ID is %s",outdoorSensorID);
-	Log("HotTubLogic> Equipment ID is %s",equipSensorID);
+	Log("HotTubLogic> Equipment Sensor ID is %s",equipSensorID);
     do
     {
 		time(&now);
@@ -264,6 +264,8 @@ void *HotTubLogic(void *param)
 		if (showOutput)
 		{
 			sprintf(tmp,"HotTubLogic> water: %6.1f   heater: %6.1f",currentTemp,heaterTemp);
+			Log(tmp);
+			sprintf(tmp,"HotTubLogic> outdoor: %6.1f   Equipment: %6.1f",outdoorTemp,equipmentTemp);
 			Log(tmp);
 		}
 
@@ -291,7 +293,8 @@ void *HotTubLogic(void *param)
 				strcpy(failMessage,"Heater Over Temp");
 				sprintf(tmp,"HotTubLogic> ***** Heater Over Temp ****** %6.1f",heaterTemp);
 				Log(tmp);
-				sendSimpleMail(NoticeToAddress, 
+				sendSimpleMail(MTA,
+						NoticeToAddress, 
 						NoticeFromAddress, 
 						"Hottub Fail", 
 						tmp);
@@ -333,11 +336,12 @@ void *HotTubLogic(void *param)
 						strcpy(failMessage,"Heater Timeout");
 						sprintf(tmp,"HotTubLogic> ***** Heater timeout ****** %6.1f",currentTemp-startTemp);
 						Log(tmp);
-						sendSimpleMail(NoticeToAddress, 
+						sendSimpleMail(MTA,
+								NoticeToAddress, 
 								NoticeFromAddress, 
 								"Hottub Fail", 
 								"Heater timeout!\n");
-						TBH_LED7_blinkRate(1);
+						//TBH_LED7_blinkRate(1);
 					}
 				}
 			}

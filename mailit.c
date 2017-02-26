@@ -18,11 +18,11 @@
 #include <arpa/inet.h>
 
 #define EMAIL_PORT 25
-#define NoticeToAddress "giftie61@gmail.com"
-#define NoticeFromAddress "giftie@shaw.ca"
+//#define NoticeToAddress "giftie61@gmail.com"
+//#define NoticeFromAddress "giftie@shaw.ca"
 
 // You will need to set the address for your mail (SMTP) server here
-#define MTA "imap.shaw.ca"
+//#define MTA "imap.shaw.ca"
 
 /****************************************************************************/
 
@@ -61,7 +61,7 @@ int ReadResp(int sk, char *line, int max)
 
 /****************************************************************************/
 // return 0 if no error
-int sendSimpleMail( char *toaddr, char *fromaddr, char *subject, char *body)
+int sendSimpleMail( char *eserver, char *toaddr, char *fromaddr, char *subject, char *body)
 {
 	int error, retval = 0;
 	char line[1000];
@@ -71,7 +71,7 @@ int sendSimpleMail( char *toaddr, char *fromaddr, char *subject, char *body)
 	int timeout = 1*60*1000;	
 	do
 	{
-		if (!(host=gethostbyname(MTA))) {
+		if (!(host=gethostbyname(eserver))) {
 		    printf(" Unable to get host address\n");
 			retval = 2;
 			break;

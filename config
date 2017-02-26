@@ -1,4 +1,5 @@
-ThingSpeakAPIkey=XRIUDADZK1TI8OE6
+debug=0
+ThingSpeakAPIkey=YOURAPIHERE
 NoticeToAddress=youremail@blah.com
 NoticeFromAddress=youremail@blah.com
 MTA=smtp.yourserver.com
