@@ -70,10 +70,11 @@ int LogOpen(char *filename)
 
 	// save this in static variable so we knw when day changes
 	Julian = today->tm_yday+1;
-
+    
 	// put together the file name
 	sprintf(temp,"%s_%04d-%02d-%02d.log",filename,
 		             today->tm_year+1900,today->tm_mon+1,today->tm_mday);
+    printf(temp); 
    logfp = fopen (temp, "a" );
 
    if ( logfp == NULL ) {
