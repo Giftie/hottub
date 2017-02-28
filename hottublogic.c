@@ -485,7 +485,7 @@ void *HotTubLogic(void *param)
 		if ((filterOn==0) && ((now-filterTime)>filterOffDuration))
 		{
 			Log("HotTubLogic> Filtering On");
-			jet1Level = 1;
+			jetsLevel = 1;
 			filterTime = now;
 			filterOn = 1;
 		}
@@ -494,7 +494,7 @@ void *HotTubLogic(void *param)
 			if ((filterOn==1) && ((now-filterTime)>filterOnDuration))
 			{
 				Log("HotTubLogic> Filtering Off");
-				jet1Level = 0;
+				jetsLevel = 0;
 				filterOn = 0;
 			}
 		}
