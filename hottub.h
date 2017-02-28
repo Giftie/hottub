@@ -83,7 +83,9 @@ EXTERN int			filterOffDuration;			// seconds to not run filter
 EXTERN int          textThrottle;				// min seconds between text messages
 EXTERN int 			heatIsOn;
 EXTERN int 			pumpIsOn;
-EXTERN int 			jet1Level;					// pump level for jets: 0=off, 1=low, 2=high
+EXTERN int 			jetsLevel;					// pump level for jets: 0=off, 1=high
 EXTERN int 			jet2Level;
 EXTERN char			failMessage[40];			// what failed
+EXTERN char			freezeWarning[40];			// freezeWarning
+
 EXTERN long long int butDebounce; 				// for SW debounce
