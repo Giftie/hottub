@@ -72,9 +72,9 @@ void jet1Button_Interrupt(void)
 {
 	Log("JET 1 BUTTON PRESSED");
 	if (abs(getTicks()-butDebounce)<butBounce) return;
-	jet1Level++;
-	if (jet1Level>2)
-		jet1Level=0;
+	jetsLevel++;
+	if (jetsLevel>1)
+		jetsLevel=0;
 	butDebounce=getTicks();
 }	
 
@@ -153,9 +153,9 @@ void *jet1Thread(void *param)
 		{
 			Sleep(50);
 		} else if (jetsLevel==1) {
-			Sleep(500);
+			Sleep(150);
 			digitalWrite(jet1LedPin, 0);
-			Sleep(500);
+			Sleep(150);
 		} else {
 			Sleep(150);
 			digitalWrite(jet1LedPin, 0);
