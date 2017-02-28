@@ -24,7 +24,7 @@
  
 #define pumpPin 0
 #define heaterPin 2
-#define jet1LoPin 3
+#define jetsPin 3
 #define jet1HiPin 12
 #define jet2LoPin 13
 #define jet2HiPin 14
