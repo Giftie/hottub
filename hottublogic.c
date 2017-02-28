@@ -513,12 +513,13 @@ void *HotTubLogic(void *param)
 	HeatOff();
 	PumpOff();
 	piLock(0);
-	digitalWrite(jet1LoPin,1);
-	digitalWrite(jet1HiPin,1);
+	digitalWrite(jetPin,0);
+	/*digitalWrite(jet1HiPin,1);
 	digitalWrite(jet2LoPin,1);
 	digitalWrite(jet2HiPin,1);
+	*/
 	digitalWrite(jet1LedPin,0);
-	digitalWrite(jet2LedPin,0);
+	//digitalWrite(jet2LedPin,0);
 	piUnlock(0);
 	Log("HotTubLogic> thread exiting");
 }
