@@ -289,7 +289,7 @@ void *HotTubLogic(void *param)
 		// check for equipment freeze warning
 		if (equipmentTemp<minEquipmentTemp)
 		{
-			if (strcmp(freezeMessage,"OK")==0)
+			if (strcmp(freezeWarning,"OK")==0)
 			{
 				strcpy(freezeWarning,"FREEZE");
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning ****** %6.1f",equipmentTemp);
