@@ -513,7 +513,7 @@ void *HotTubLogic(void *param)
 	HeatOff();
 	PumpOff();
 	piLock(0);
-	digitalWrite(jetPin,0);
+	digitalWrite(jetsPin,0);
 	/*digitalWrite(jet1HiPin,1);
 	digitalWrite(jet2LoPin,1);
 	digitalWrite(jet2HiPin,1);
