@@ -303,9 +303,8 @@ void *HotTubLogic(void *param)
 			}
 		}
 		// Check to see if equipment has is returned to above the minimun Equipment temp
-		if (equipmentTemp>minEquipmentTemp)
+		/*if (equipmentTemp>minEquipmentTemp)
 		{
-			printf("%s",freezeWarning);
 			if (strcmp(freezeWarning,"FREEZE")!=0)
 				strcpy(freezeWarning,"OK");
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning Cleared****** %6.1f",equipmentTemp);
@@ -315,7 +314,7 @@ void *HotTubLogic(void *param)
 						NoticeFromAddress, 
 						"Equipment Freeze Warning Cleared", 
 						tmp);
-		}		
+		}*/		
 		// check for over-temp on heater
 		if (heaterTemp>maxHeaterTemp)
 		{
