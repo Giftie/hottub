@@ -112,12 +112,12 @@ void setupGPIO()
 		
 		initGpioOutput(pumpPin,0);
 		initGpioOutput(heaterPin,0);
-		initGpioOutput(jet1LoPin,0);
-		initGpioOutput(jet1HiPin,0);
+		initGpioOutput(jetsPin,0);
+		/*initGpioOutput(jet1HiPin,0);
 		initGpioOutput(jet2LoPin,0);
 		initGpioOutput(jet2HiPin,0);
 		initGpioOutput(jet1LedPin,0);
-		initGpioOutput(jet2LedPin,0);
+		initGpioOutput(jet2LedPin,0);)*/
 		
 		if ( wiringPiISR (upButPin, INT_EDGE_FALLING, &upButton_Interrupt) < 0 ) {
 			Log("Unable to setup ISR\n");
@@ -149,10 +149,10 @@ void *jet1Thread(void *param)
 	while (!kicked)
 	{
 		digitalWrite(jet1LedPin, 1);
-		if (jet1Level==0)
+		if (jetsLevel==0)
 		{
 			Sleep(50);
-		} else if (jet1Level==1) {
+		} else if (jetsLevel==1) {
 			Sleep(500);
 			digitalWrite(jet1LedPin, 0);
 			Sleep(500);
