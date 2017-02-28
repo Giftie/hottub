@@ -467,10 +467,10 @@ void *HotTubLogic(void *param)
 		}
 		*/
 		// timeout jets
-		if ((jet1Level!=0) && (now-j1OnTime)>900)
+		if ((jetsLevel!=0) && (now-j1OnTime)>900)
 		{
-			Log("HotTubLogic> Time out Jet 1");
-			jet1Level = 0;
+			Log("HotTubLogic> Time out Jets");
+			jetsLevel = 0;
 		}
 		/*
 		if ((jet2Level!=0) && (now-j2OnTime)>900)
