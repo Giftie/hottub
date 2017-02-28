@@ -289,9 +289,8 @@ void *HotTubLogic(void *param)
 		// check for equipment freeze warning
 		if (equipmentTemp<minEquipmentTemp)
 		{
-			if (strcmp(failMessage,"OK")==0)
+			if (strcmp(freezeMessage,"OK")==0)
 			{
-				strcpy(failMessage,"Equipment Freeze Waring");
 				strcpy(freezeWarning,"FREEZE");
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning ****** %6.1f",equipmentTemp);
 				Log(tmp);
@@ -306,8 +305,7 @@ void *HotTubLogic(void *param)
 		// Check to see if equipment has is returned to above the minimun Equipment temp
 		if (equipmentTemp>minEquipmentTemp)
 		{
-			if (strcmp(freezeWarning,"OK")!=0)
-				strcpy(failMessage,"OK");
+			if (strcmp(freezeWarning,"FREEZE")==0)
 				strcpy(freezeWarning,"OK");
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning Cleared****** %6.1f",equipmentTemp);
 				Log(tmp);
