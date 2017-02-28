@@ -69,6 +69,7 @@ void getTemperature(char *id, double *value)
 	if (strlen(id)<1)
 	{
 		*value = 999.9;
+		//*valuec = 999.99;
 		return;
 	}
 	
@@ -79,6 +80,7 @@ void getTemperature(char *id, double *value)
 	{
 		Log("Error %d opening %s",errno,buff);
 		*value = BADTEMP;
+		//*valuec = BADTEMP;
 		return;
 	}
 	read_line(fd,buff,sizeof(buff));
@@ -88,6 +90,7 @@ void getTemperature(char *id, double *value)
 		Log("error on 1-wire read: %s",buff);
 		fclose(fd);
 		*value = BADTEMP;
+		//*valuec = BADTEMP;
 		return;
 	}
 	read_line(fd,buff,sizeof(buff));
@@ -98,11 +101,13 @@ void getTemperature(char *id, double *value)
 		Log("error on 1-wire read: %s",buff);
 		fclose(fd);
 		*value = BADTEMP;
+		//*valuec = BADTEMP;
 		return;
 	}
 	fclose(fd);
 	c = atof(p+2);
 	*value = ((c/1000.0) * 1.8) + 32.0;
+	//*valuec = (c/1000);
 	return;
 }
 
@@ -237,6 +242,9 @@ void *HotTubLogic(void *param)
 {
 	int pin, i, x, a0, a1, a2, showOutput, j1=-1, j2=-1;
 	char tmp[80];
+	char tmp2[80];
+	char tmp3[80];
+	char tmp4[80];
 	FILE *fd;
 	time_t now, lastOutput=0, lastPost=0, heatOnTime;
 	time_t filterTime, filterOn, j1OnTime, j2OnTime;
@@ -248,6 +256,7 @@ void *HotTubLogic(void *param)
 	time(&now);
 	filterTime = now;
 	strcpy(failMessage,"OK");
+	strcpy(freezeWarning,"OK");
 		
 	// start polling loop
 	Log("HotTubLogic> start polling loop.");
@@ -270,13 +279,10 @@ void *HotTubLogic(void *param)
 		if (difftime(now,lastPost)>300)
 		{
 			sprintf(tmp,"%f",currentTemp);
-			UpdateThingSpeak(ThingSpeakAPIkey, "field1", tmp);
-			sprintf(tmp,"%f",heaterTemp);
-			UpdateThingSpeak(ThingSpeakAPIkey, "field2", tmp);
-			sprintf(tmp,"%f",outdoorTemp);
-			UpdateThingSpeak(ThingSpeakAPIkey, "field3", tmp);
-			sprintf(tmp,"%f",equipmentTemp);
-			UpdateThingSpeak(ThingSpeakAPIkey, "field4", tmp);			
+			sprintf(tmp2,"%f",heaterTemp);
+			sprintf(tmp3,"%f",outdoorTemp);
+			sprintf(tmp4,"%f",equipmentTemp);			
+			UpdateThingSpeak(ThingSpeakAPIkey, "field1", tmp, "field2", tmp2, "field3", tmp3, "field4", tmp4);		
 			time(&lastPost);
 		}
 		
@@ -286,6 +292,7 @@ void *HotTubLogic(void *param)
 			if (strcmp(failMessage,"OK")==0)
 			{
 				strcpy(failMessage,"Equipment Freeze Waring");
+				strcpy(freezeWarning,"FREEZE");
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning ****** %6.1f",equipmentTemp);
 				Log(tmp);
 				sendSimpleMail(MTA,
@@ -293,9 +300,23 @@ void *HotTubLogic(void *param)
 						NoticeFromAddress, 
 						"Equipment Freeze Warning", 
 						tmp);
-				//TBH_LED7_blinkRate(1);
+			    //TBH_LED7_blinkRate(1);
 			}
 		}
+		// Check to see if equipment has is returned to above the minimun Equipment temp
+		if (equipmentTemp>minEquipmentTemp)
+		{
+			if (strcmp(freezeWarning,"OK")!=0)
+				strcpy(failMessage,"OK");
+				strcpy(freezeWarning,"OK");
+				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning Cleared****** %6.1f",equipmentTemp);
+				Log(tmp);
+				sendSimpleMail(MTA,
+						NoticeToAddress, 
+						NoticeFromAddress, 
+						"Equipment Freeze Warning Cleared", 
+						tmp);
+		}		
 		// check for over-temp on heater
 		if (heaterTemp>maxHeaterTemp)
 		{
@@ -382,38 +403,40 @@ void *HotTubLogic(void *param)
 		}
 		
 		// change jet level if needed
-		if (j1!=jet1Level)
+		if (j1!=jetsLevel)
 		{
-			j1 = jet1Level;
+			j1 = jetsLevel;
 			switch (j1)
 			{
 			case 0:
-				Log("HotTubLogic> Jet 1 off");
+				Log("HotTubLogic> Jets off");
 				piLock(0);
-				digitalWrite(jet1LoPin,0);
-				digitalWrite(jet1HiPin,0);
+				digitalWrite(jetsPin,0);
+				//digitalWrite(jet1HiPin,0);
 				piUnlock(0);
+				PumpOn();
 				break;
 			case 1:
-				Log("HotTubLogic> Jet 1 low");
+				Log("HotTubLogic> Jets High");
+				PumpOff();
 				piLock(0);
-				digitalWrite(jet1LoPin,1);
-				digitalWrite(jet1HiPin,0);
+				digitalWrite(jetsPin,1);
+				//digitalWrite(jet1HiPin,0);
 				piUnlock(0);
 				time(&j1OnTime);
 				break;
-			case 2:
+			/*case 2:
 				Log("HotTubLogic> Jet 1 high");
 				piLock(0);
 				digitalWrite(jet1LoPin,0);
 				digitalWrite(jet1HiPin,1);
 				piUnlock(0);
 				time(&j1OnTime);
-				break;
+				break; */
 			}		
 		}
-		if (j2!=jet2Level)
-		{
+		/*if (j2!=jet2Level)
+		  {
 			j2 = jet2Level;
 			switch (j2)
 			{
@@ -442,26 +465,27 @@ void *HotTubLogic(void *param)
 				break;
 			}		
 		}
-
+		*/
 		// timeout jets
 		if ((jet1Level!=0) && (now-j1OnTime)>900)
 		{
 			Log("HotTubLogic> Time out Jet 1");
 			jet1Level = 0;
 		}
+		/*
 		if ((jet2Level!=0) && (now-j2OnTime)>900)
 		{
 			Log("HotTubLogic> Time out Jet 2");
 			jet2Level = 0;
 		}	
-
+		*/
 		// turn on jet for filtering periodically
 		time(&now);
 		///Log("FilterLogic> now=%d  filterTime=%d  diff=%d",now,filterTime,(now-filterTime));
 		if ((filterOn==0) && ((now-filterTime)>filterOffDuration))
 		{
 			Log("HotTubLogic> Filtering On");
-			jet1Level = 2;
+			jet1Level = 1;
 			filterTime = now;
 			filterOn = 1;
 		}
