@@ -51,7 +51,7 @@ second line will end with t=12345    milli degrees C
 */
 
 int sendSimpleMail( char *eserver, char *toaddr, char *fromaddr, char *subject, char *body);
-int UpdateThingSpeak(char *api_key, char *field_name, char *value, char *field_name, char *value, char *field_name, char *value, char *field_name, char *value);
+int UpdateThingSpeak(char *api_key, char *field_name, char *value, char *field_name2, char *value2, char *field_name3, char *value3, char *field_name4, char *value4);
 
 double BADTEMP = 999.0;
 time_t pumpTurnedOnTime = 0;
