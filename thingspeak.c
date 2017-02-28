@@ -21,7 +21,7 @@ void Log(char *format, ... );
 
 // the URL structure to update ThingSpeak
 // https://api.thingspeak.com/update?api_key=YOUR_CHANNEL_API_KEY&field1=7
-char *URLtemplate = "https://api.thingspeak.com/update?api_key=%s&%s=%s";
+char *URLtemplate = "https://api.thingspeak.com/update?api_key=%s&%s=%s&%s=%s&%s=%s&%s=%s";
 
 // structure used by the libcurl write callback function
 struct url_data {
@@ -57,7 +57,7 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, struct url_data *data) {
 
 //=====================================================================
 // upload data to ThingSpeak
-int UpdateThingSpeak(char *api_key, char *field_name, char *value)
+int UpdateThingSpeak(char *api_key, char *field_name, char *value, char *field_name2, char *value2, char *field_name3, char *value3, char *field_name4, char *value4)
 {
 	int 		error = 1;
 	time_t 		now;
@@ -72,7 +72,7 @@ int UpdateThingSpeak(char *api_key, char *field_name, char *value)
 	dt = gmtime(&now);
                          
 	// build the URL string
-	snprintf(url, sizeof(url)-1, URLtemplate, api_key, field_name, value);
+	snprintf(url, sizeof(url)-1, URLtemplate, api_key, field_name, value, field_name2, value2, field_name3, value3, field_name4, value4);
 	// guarantee null termination of string
 	url[sizeof(url)-1] = 0;
 	
