@@ -65,7 +65,7 @@ void DoStatus(int fd)
 	sendStr(fd,buff);
 	sprintf(buff,"%s\n",failMessage);
 	sendStr(fd,buff);
-	sprintf(buff,"%s\n",jetlevel(jet1Level));
+	sprintf(buff,"%s\n",jetlevel(jetsLevel));
 	sendStr(fd,buff);
 	sprintf(buff,"%s\n",jetlevel(jet2Level));
 	sendStr(fd,buff);
@@ -123,7 +123,7 @@ void Command(int fd, char *cmdline)
 	if (!strcasecmp(cmd,"jet1")) {
 		sendStr(fd,"OK\n");
 		close(fd);
-		jet1Level = (jet1Level+1) % 3;
+		jetsLevel = (jetsLevel+1) % 3;
 		return;
 	}
 	if (!strcasecmp(cmd,"jet2")) {
