@@ -58,7 +58,6 @@ long long int getTicks();
 // simultaneous access from multiple threads
 EXTERN int			kicked;						// flag for shutdown or restart
 EXTERN int 			debug;					    // flag to allow debug log output
-EXTERN char         freezeWarning[32];			// freeze warning check
 EXTERN char         ThingSpeakAPIkey[32];       // 
 EXTERN char         NoticeToAddress[32];
 EXTERN char         NoticeFromAddress[32];
