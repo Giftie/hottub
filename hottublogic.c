@@ -256,7 +256,6 @@ void *HotTubLogic(void *param)
 	time(&now);
 	filterTime = now;
 	strcpy(failMessage,"OK");
-	strcpy(freezeWarning,"OK");
 		
 	// start polling loop
 	Log("HotTubLogic> start polling loop.");
@@ -303,7 +302,7 @@ void *HotTubLogic(void *param)
 			}
 		}
 		// Check to see if equipment has is returned to above the minimun Equipment temp
-		/*if (equipmentTemp>minEquipmentTemp)
+		if (equipmentTemp>minEquipmentTemp)
 		{
 			if (strcmp(freezeWarning,"FREEZE")!=0)
 				strcpy(freezeWarning,"OK");
@@ -314,7 +313,7 @@ void *HotTubLogic(void *param)
 						NoticeFromAddress, 
 						"Equipment Freeze Warning Cleared", 
 						tmp);
-		}*/		
+		}		
 		// check for over-temp on heater
 		if (heaterTemp>maxHeaterTemp)
 		{
@@ -410,7 +409,7 @@ void *HotTubLogic(void *param)
 				Log("HotTubLogic> Jets off");
 				piLock(0);
 				digitalWrite(jetsPin,0);
-				//digitalWrite(jet1HiPin,0);
+				//digitalWrite(socket1Pin,0);
 				piUnlock(0);
 				PumpOn();
 				break;
@@ -419,7 +418,7 @@ void *HotTubLogic(void *param)
 				PumpOff();
 				piLock(0);
 				digitalWrite(jetsPin,1);
-				//digitalWrite(jet1HiPin,0);
+				//digitalWrite(socket1Pin,0);
 				piUnlock(0);
 				time(&j1OnTime);
 				break;
@@ -427,7 +426,7 @@ void *HotTubLogic(void *param)
 				Log("HotTubLogic> Jet 1 high");
 				piLock(0);
 				digitalWrite(jet1LoPin,0);
-				digitalWrite(jet1HiPin,1);
+				digitalWrite(socket1Pin,1);
 				piUnlock(0);
 				time(&j1OnTime);
 				break; */
@@ -441,23 +440,23 @@ void *HotTubLogic(void *param)
 			case 0:
 				Log("HotTubLogic> Jet 2 off");
 				piLock(0);
-				digitalWrite(jet2LoPin,0);
-				digitalWrite(jet2HiPin,0);
+				digitalWrite(socket2Pin,0);
+				digitalWrite(socket3Pin,0);
 				piUnlock(0);
 				break;
 			case 1:
 				Log("HotTubLogic> Jet 2 low");
 				piLock(0);
-				digitalWrite(jet2LoPin,1);
-				digitalWrite(jet2HiPin,0);
+				digitalWrite(socket2Pin,1);
+				digitalWrite(socket3Pin,0);
 				piUnlock(0);
 				time(&j2OnTime);
 				break;
 			case 2:
 				Log("HotTubLogic> Jet 2 high");
 				piLock(0);
-				digitalWrite(jet2LoPin,0);
-				digitalWrite(jet2HiPin,1);
+				digitalWrite(socket2Pin,0);
+				digitalWrite(socket3Pin,1);
 				piUnlock(0);
 				time(&j2OnTime);
 				break;
@@ -512,12 +511,11 @@ void *HotTubLogic(void *param)
 	PumpOff();
 	piLock(0);
 	digitalWrite(jetsPin,0);
-	/*digitalWrite(jet1HiPin,1);
-	digitalWrite(jet2LoPin,1);
-	digitalWrite(jet2HiPin,1);
-	*/
+	digitalWrite(socket1Pin,0);
+	digitalWrite(socket2Pin,0);
+	digitalWrite(socket3Pin,0);
 	digitalWrite(jet1LedPin,0);
-	//digitalWrite(jet2LedPin,0);
+	digitalWrite(jet2LedPin,0);
 	piUnlock(0);
 	Log("HotTubLogic> thread exiting");
 }

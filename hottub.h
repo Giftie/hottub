@@ -25,9 +25,9 @@
 #define pumpPin 0
 #define heaterPin 2
 #define jetsPin 3
-#define jet1HiPin 12
-#define jet2LoPin 13
-#define jet2HiPin 14
+#define socket1Pin 12
+#define socket2Pin 13
+#define socket3Pin 14
 #define jet1ButPin 30
 #define jet2ButPin 21
 #define upButPin 22
@@ -57,7 +57,8 @@ long long int getTicks();
 // GLOBAL variables.  A lock needs to be used to prevent any 
 // simultaneous access from multiple threads
 EXTERN int			kicked;						// flag for shutdown or restart
-EXTERN int 			debug;						// flag to allow debug log output
+EXTERN int 			debug;					    // flag to allow debug log output
+EXTERN char         freezeWarning[32];			// freeze warning check
 EXTERN char         ThingSpeakAPIkey[32];       // 
 EXTERN char         NoticeToAddress[32];
 EXTERN char         NoticeFromAddress[32];

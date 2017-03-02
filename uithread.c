@@ -113,9 +113,9 @@ void setupGPIO()
 		initGpioOutput(pumpPin,0);
 		initGpioOutput(heaterPin,0);
 		initGpioOutput(jetsPin,0);
-		/*initGpioOutput(jet1HiPin,0);
-		initGpioOutput(jet2LoPin,0);
-		initGpioOutput(jet2HiPin,0);
+		/*initGpioOutput(socket1Pin,0);
+		initGpioOutput(socket2Pin,0);
+		initGpioOutput(socket3Pin,0);
 		initGpioOutput(jet1LedPin,0);
 		initGpioOutput(jet2LedPin,0);)*/
 		
