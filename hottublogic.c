@@ -307,6 +307,7 @@ void *HotTubLogic(void *param)
 		if (equipmentTemp>minEquipmentTemp)
 		{
 			if (freezeWarning != 0)
+			{
 				freezeWarning = 0;
 				sprintf(tmp,"freezeWarning is now 0");
 				Log(tmp);
@@ -317,6 +318,7 @@ void *HotTubLogic(void *param)
 						NoticeFromAddress, 
 						"Equipment Freeze Warning Cleared", 
 						tmp);
+			}
 		}		
 		// check for over-temp on heater
 		if (heaterTemp>maxHeaterTemp)
