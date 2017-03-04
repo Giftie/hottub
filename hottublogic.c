@@ -419,7 +419,8 @@ void *HotTubLogic(void *param)
 				time(&j1OnTime);
 				break;
 			}
-		// change jet level if needed
+		}
+		// change socket 1 level if needed
 		if (j2!=socket1Level)
 		{
 			j2 = socket1Level;
