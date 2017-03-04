@@ -283,8 +283,6 @@ void *HotTubLogic(void *param)
 			if (freezeWarning == 0)
 			{
 				freezeWarning = 1;
-				sprintf(tmp,"freezeWarning is now 1");
-				Log(tmp);
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning ****** %6.1f",equipmentTemp);
 				Log(tmp);
 				sendSimpleMail(MTA,
@@ -301,8 +299,6 @@ void *HotTubLogic(void *param)
 			if (freezeWarning != 0)
 			{
 				freezeWarning = 0;
-				sprintf(tmp,"freezeWarning is now 0");
-				Log(tmp);
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning Cleared****** %6.1f",equipmentTemp);
 				Log(tmp);
 				sendSimpleMail(MTA,
