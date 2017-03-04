@@ -305,7 +305,7 @@ void *HotTubLogic(void *param)
 		if (equipmentTemp>minEquipmentTemp)
 		{
 			if (!freezeWarning)
-				freezeWarning = 0
+				freezeWarning = 0;
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning Cleared****** %6.1f",equipmentTemp);
 				Log(tmp);
 				sendSimpleMail(MTA,

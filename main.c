@@ -198,7 +198,6 @@ int main(int argc, char *argv[])
 	LogOpen("/opt/projects/logs/hottub");
     // read config values
 	readConfig(CONFIGFILE);
-	strcpy(freezeWarning,"OK");
 	// start the main loop
 	do
 	{
