@@ -41,14 +41,6 @@ second line will end with t=12345    milli degrees C
 #include <wiringPi.h>
 
 #include "hottub.h"
-/*
-# put your own key here
-#define ThingSpeakAPIkey "ABCDEFG123456789"
-
-#put your own To and From addresses for notifications
-#define NoticeToAddress "giftie61@gmail.com"
-#define NoticeFromAddress "giftie@shaw.ca"
-*/
 
 int sendSimpleMail( char *eserver, char *toaddr, char *fromaddr, char *subject, char *body);
 int UpdateThingSpeak(char *api_key, char *field_name, char *value, char *field_name2, char *value2, char *field_name3, char *value3, char *field_name4, char *value4);

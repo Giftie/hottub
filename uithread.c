@@ -113,11 +113,11 @@ void setupGPIO()
 		initGpioOutput(pumpPin,0);
 		initGpioOutput(heaterPin,0);
 		initGpioOutput(jetsPin,0);
-		/*initGpioOutput(socket1Pin,0);
+		initGpioOutput(socket1Pin,0);
 		initGpioOutput(socket2Pin,0);
 		initGpioOutput(socket3Pin,0);
 		initGpioOutput(jet1LedPin,0);
-		initGpioOutput(jet2LedPin,0);)*/
+		initGpioOutput(jet2LedPin,0);
 		
 		if ( wiringPiISR (upButPin, INT_EDGE_FALLING, &upButton_Interrupt) < 0 ) {
 			Log("Unable to setup ISR\n");
