@@ -129,7 +129,7 @@ PumpOff()
 //**************************************************************************
 HeatOn()
 {
-	if ( (heatIsOn) || (JetsLevel) ) return; // If heat is already on, or Jets are on, don't turn on the heat
+	if ( (heatIsOn) || (jetsLevel) ) return; // If heat is already on, or Jets are on, don't turn on the heat
 	heatIsOn = 1;		
 	Log("HotTubLogic> Turn heat ON");
 	piLock(0);
