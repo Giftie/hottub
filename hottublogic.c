@@ -129,7 +129,7 @@ PumpOff()
 //**************************************************************************
 HeatOn()
 {
-	if (heatIsOn) return;
+	if ( (heatIsOn) || (JetsLevel) ) return; // If heat is already on, or Jets are on, don't turn on the heat
 	heatIsOn = 1;		
 	Log("HotTubLogic> Turn heat ON");
 	piLock(0);
@@ -337,9 +337,9 @@ void *HotTubLogic(void *param)
 		if (!heatIsOn)
 		{
 			LogDbg("HotTubLogic> heat not on");
-			if (currentTemp < (desiredTemp-slopTemp))
+			if (currentTemp < (desiredTemp-slopTemp)) 
 			{
-				PumpOn();
+				PumpOn(); // Pump always on when Heat is.
 				HeatOn();
 				time(&heatOnTime);
 				startTemp = currentTemp;
