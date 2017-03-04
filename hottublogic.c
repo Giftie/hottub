@@ -253,6 +253,7 @@ void *HotTubLogic(void *param)
 
 	heatIsOn = 0;
 	pumpIsOn = 0;
+	freezeWarning = 0;
 	time(&now);
 	filterTime = now;
 	strcpy(failMessage,"OK");
@@ -274,7 +275,7 @@ void *HotTubLogic(void *param)
 			sprintf(tmp,"HotTubLogic> water: %6.1f   heater: %6.1f	   outdoor: %6.1f   Equipment: %6.1f",currentTemp,heaterTemp,outdoorTemp,equipmentTemp);
 			Log(tmp);
 		}
-
+		// Should we update ThingSpeak?
 		if (difftime(now,lastPost)>300)
 		{
 			sprintf(tmp,"%f",currentTemp);
@@ -283,14 +284,13 @@ void *HotTubLogic(void *param)
 			sprintf(tmp4,"%f",equipmentTemp);			
 			UpdateThingSpeak(ThingSpeakAPIkey, "field1", tmp, "field2", tmp2, "field3", tmp3, "field4", tmp4);		
 			time(&lastPost);
-		}
-		
+		}		
 		// check for equipment freeze warning
 		if (equipmentTemp<minEquipmentTemp)
 		{
-			if (strcmp(freezeWarning,"OK")==0)
+			if (freezeWarning)
 			{
-				strcpy(freezeWarning,"FREEZE");
+				freezeWarning = 1;
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning ****** %6.1f",equipmentTemp);
 				Log(tmp);
 				sendSimpleMail(MTA,
@@ -304,8 +304,8 @@ void *HotTubLogic(void *param)
 		// Check to see if equipment has is returned to above the minimun Equipment temp
 		if (equipmentTemp>minEquipmentTemp)
 		{
-			if (strcmp(freezeWarning,"FREEZE")==0)
-				strcpy(freezeWarning,"OK");
+			if (!freezeWarning)
+				freezeWarning = 0
 				sprintf(tmp,"HotTubLogic> ***** Equipment Freeze Warning Cleared****** %6.1f",equipmentTemp);
 				Log(tmp);
 				sendSimpleMail(MTA,
@@ -409,7 +409,6 @@ void *HotTubLogic(void *param)
 				Log("HotTubLogic> Jets off");
 				piLock(0);
 				digitalWrite(jetsPin,0);
-				//digitalWrite(socket1Pin,0);
 				piUnlock(0);
 				PumpOn();
 				break;
@@ -418,64 +417,17 @@ void *HotTubLogic(void *param)
 				PumpOff();
 				piLock(0);
 				digitalWrite(jetsPin,1);
-				//digitalWrite(socket1Pin,0);
 				piUnlock(0);
 				time(&j1OnTime);
 				break;
-			/*case 2:
-				Log("HotTubLogic> Jet 1 high");
-				piLock(0);
-				digitalWrite(jet1LoPin,0);
-				digitalWrite(socket1Pin,1);
-				piUnlock(0);
-				time(&j1OnTime);
-				break; */
 			}		
 		}
-		/*if (j2!=jet2Level)
-		  {
-			j2 = jet2Level;
-			switch (j2)
-			{
-			case 0:
-				Log("HotTubLogic> Jet 2 off");
-				piLock(0);
-				digitalWrite(socket2Pin,0);
-				digitalWrite(socket3Pin,0);
-				piUnlock(0);
-				break;
-			case 1:
-				Log("HotTubLogic> Jet 2 low");
-				piLock(0);
-				digitalWrite(socket2Pin,1);
-				digitalWrite(socket3Pin,0);
-				piUnlock(0);
-				time(&j2OnTime);
-				break;
-			case 2:
-				Log("HotTubLogic> Jet 2 high");
-				piLock(0);
-				digitalWrite(socket2Pin,0);
-				digitalWrite(socket3Pin,1);
-				piUnlock(0);
-				time(&j2OnTime);
-				break;
-			}		
-		}
-		*/
 		// timeout jets
 		if ((jetsLevel!=0) && (now-j1OnTime)>900)
 		{
 			Log("HotTubLogic> Time out Jets");
 			jetsLevel = 0;
 		}
-		/*
-		if ((jet2Level!=0) && (now-j2OnTime)>900)
-		{
-			Log("HotTubLogic> Time out Jet 2");
-			jet2Level = 0;
-		}	
-		*/
 		// turn on jet for filtering periodically
 		time(&now);
 		///Log("FilterLogic> now=%d  filterTime=%d  diff=%d",now,filterTime,(now-filterTime));

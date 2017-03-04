@@ -86,6 +86,6 @@ EXTERN int 			pumpIsOn;
 EXTERN int 			jetsLevel;					// pump level for jets: 0=off, 1=high
 EXTERN int 			jet2Level;
 EXTERN char			failMessage[40];			// what failed
-EXTERN char			freezeWarning[40];			// freezeWarning
+EXTERN int			freezeWarning;			// freezeWarning
 
 EXTERN long long int butDebounce; 				// for SW debounce
