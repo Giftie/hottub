@@ -67,7 +67,7 @@ void DoStatus(int fd)
 	sendStr(fd,buff);
 	sprintf(buff,"%s\n",jetlevel(jetsLevel));
 	sendStr(fd,buff);
-	sprintf(buff,"%s\n",jetlevel(jet2Level));
+	sprintf(buff,"%s\n",jetlevel(socket1Level));
 	sendStr(fd,buff);
 	
 	sendStr(fd,"\n");
@@ -129,7 +129,7 @@ void Command(int fd, char *cmdline)
 	if (!strcasecmp(cmd,"jet2")) {
 		sendStr(fd,"OK\n");
 		close(fd);
-		jet2Level = (jet2Level+1) % 3;
+		socket1Level = (socket1Level+1) % 3;
 		return;
 	}
 

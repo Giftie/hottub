@@ -418,7 +418,29 @@ void *HotTubLogic(void *param)
 				piUnlock(0);
 				time(&j1OnTime);
 				break;
-			}		
+			}
+		// change jet level if needed
+		if (j2!=socket1Level)
+		{
+			j2 = socket1Level;
+			switch (j2)
+			{
+			case 0:
+				Log("HotTubLogic> Socket 1 Off");
+				piLock(0);
+				digitalWrite(socket1Pin,0);
+				piUnlock(0);
+				PumpOn();
+				break;
+			case 1:
+				Log("HotTubLogic> Socket 1 On");
+				PumpOff();
+				piLock(0);
+				digitalWrite(socket1Pin,1);
+				piUnlock(0);
+				time(&j2OnTime);
+				break;
+			}
 		}
 		// timeout jets
 		if ((jetsLevel!=0) && (now-j1OnTime)>900)
@@ -464,8 +486,8 @@ void *HotTubLogic(void *param)
 	digitalWrite(socket1Pin,0);
 	digitalWrite(socket2Pin,0);
 	digitalWrite(socket3Pin,0);
-	digitalWrite(jet1LedPin,0);
-	digitalWrite(jet2LedPin,0);
+	digitalWrite(jetsLedPin,0);
+	digitalWrite(socket1LedPin,0);
 	piUnlock(0);
 	Log("HotTubLogic> thread exiting");
 }

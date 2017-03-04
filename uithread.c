@@ -81,11 +81,11 @@ void jet1Button_Interrupt(void)
 //***************************************************************************
 void jet2Button_Interrupt(void)
 {
-	Log("JET 2 BUTTON PRESSED");
+	Log("SOCKET 1 BUTTON PRESSED");
 	if (abs(getTicks()-butDebounce)<butBounce) return;
-	jet2Level++;
-	if (jet2Level>2)
-		jet2Level=0;
+	socket1Level++;
+	if (socket1Level>1)
+		socket1Level=0;
 	butDebounce=getTicks();
 }	
 
@@ -116,8 +116,8 @@ void setupGPIO()
 		initGpioOutput(socket1Pin,0);
 		initGpioOutput(socket2Pin,0);
 		initGpioOutput(socket3Pin,0);
-		initGpioOutput(jet1LedPin,0);
-		initGpioOutput(jet2LedPin,0);
+		initGpioOutput(jetsLedPin,0);
+		initGpioOutput(socket1LedPin,0);
 		
 		if ( wiringPiISR (upButPin, INT_EDGE_FALLING, &upButton_Interrupt) < 0 ) {
 			Log("Unable to setup ISR\n");
@@ -127,11 +127,11 @@ void setupGPIO()
 			Log("Unable to setup ISR\n");
 			return;
 		}
-		if ( wiringPiISR (jet1ButPin, INT_EDGE_FALLING, &jet1Button_Interrupt) < 0 ) {
+		if ( wiringPiISR (jetsButPin, INT_EDGE_FALLING, &jet1Button_Interrupt) < 0 ) {
 			Log("Unable to setup ISR\n");
 			return;
 		}
-		if ( wiringPiISR (jet2ButPin, INT_EDGE_FALLING, &jet2Button_Interrupt) < 0 ) {
+		if ( wiringPiISR (Socket1ButPin, INT_EDGE_FALLING, &jet2Button_Interrupt) < 0 ) {
 			Log("Unable to setup ISR\n");
 			return;
 		}
@@ -148,17 +148,13 @@ void *jet1Thread(void *param)
 {
 	while (!kicked)
 	{
-		digitalWrite(jet1LedPin, 1);
+		digitalWrite(jetsLedPin, 1);
 		if (jetsLevel==0)
 		{
 			Sleep(50);
-		} else if (jetsLevel==1) {
-			Sleep(150);
-			digitalWrite(jet1LedPin, 0);
-			Sleep(150);
 		} else {
 			Sleep(150);
-			digitalWrite(jet1LedPin, 0);
+			digitalWrite(jetsLedPin, 0);
 			Sleep(150);
 		}
 	}
@@ -166,22 +162,18 @@ void *jet1Thread(void *param)
 
 //**************************************************************************
 // blink jet2 button LED
-void *jet2Thread(void *param)
+void *socket1Thread(void *param)
 {
 	while (!kicked)
 	{
-		digitalWrite(jet2LedPin, 1);
-		if (jet2Level==0)
+		digitalWrite(socket1LedPin, 1);
+		if (socket1Level==0)
 		{
 			Sleep(50);
-		} else if (jet2Level==1) {
-			Sleep(500);
-			digitalWrite(jet2LedPin, 0);
-			Sleep(500);
 		} else {
-			Sleep(150);
-			digitalWrite(jet2LedPin, 0);
-			Sleep(150);
+			Sleep(500);
+			digitalWrite(socket1LedPin, 0);
+			Sleep(500);
 		}
 	}
 }
@@ -213,7 +205,7 @@ void *UiThread(void *param)
 	
 	tButPressTime = 0;
 	pthread_create(&tid, NULL, jet1Thread, NULL);
-	pthread_create(&tid, NULL, jet2Thread, NULL);
+	pthread_create(&tid, NULL, socket1Thread, NULL);
 
 	while (!kicked)
 	{

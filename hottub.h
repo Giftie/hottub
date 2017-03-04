@@ -28,12 +28,12 @@
 #define socket1Pin 12
 #define socket2Pin 13
 #define socket3Pin 14
-#define jet1ButPin 30
-#define jet2ButPin 21
+#define jetsButPin 30
+#define Socket1ButPin 21
 #define upButPin 22
 #define downButPin 23
-#define jet1LedPin 24
-#define jet2LedPin 25
+#define jetsLedPin 24
+#define socket1LedPin 25
 
 
 
@@ -84,7 +84,7 @@ EXTERN int          textThrottle;				// min seconds between text messages
 EXTERN int 			heatIsOn;
 EXTERN int 			pumpIsOn;
 EXTERN int 			jetsLevel;					// pump level for jets: 0=off, 1=high
-EXTERN int 			jet2Level;
+EXTERN int 			socket1Level;
 EXTERN char			failMessage[40];			// what failed
 EXTERN int			freezeWarning;			// freezeWarning
 
