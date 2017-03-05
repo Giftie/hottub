@@ -106,6 +106,7 @@ void getTemperature(char *id, double *value)
 //**************************************************************************
 PumpOn()
 {
+	if ( (pumpIsOn) || (jetsLevel) ) return; // If pump is already on, or Jets are on don't turn on low speed
 	pumpIsOn = 1;
 	Log("HotTubLogic> Turn pump ON");
 	time(&pumpTurnedOnTime);
