@@ -120,13 +120,13 @@ void Command(int fd, char *cmdline)
 		readDesiredTemp();
 		return;
 	}
-	if (!strcasecmp(cmd,"jet1")) {
+	if (!strcasecmp(cmd,"jets")) {
 		sendStr(fd,"OK\n");
 		close(fd);
 		jetsLevel = (jetsLevel+1) % 3;
 		return;
 	}
-	if (!strcasecmp(cmd,"jet2")) {
+	if (!strcasecmp(cmd,"socket1")) {
 		sendStr(fd,"OK\n");
 		close(fd);
 		socket1Level = (socket1Level+1) % 3;
