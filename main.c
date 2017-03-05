@@ -102,6 +102,10 @@ void readConfig(char *fname)
 	minDesired = atof(temp);
 	ReadConfigString("slopTemp","0.5",temp,sizeof(temp),fname);
 	slopTemp = atof(temp);
+	ReadConfigString("ecoMode","1",temp,sizeof(temp),fname);
+	ecoMode = atoi(temp);
+	ReadConfigString("minEcoTemp","40",temp,sizeof(temp),fname);
+	minEcoTemp = atoi(temp);
 	ReadConfigString("pumpOnFor","15",temp,sizeof(temp),fname);
 	pumpOnDuration = atoi(temp) * 60;
 	ReadConfigString("pumpOffFor","30",temp,sizeof(temp),fname);

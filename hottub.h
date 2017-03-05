@@ -76,6 +76,8 @@ EXTERN double 		maxHeaterTemp;				// fail temperature of the heater
 EXTERN double 		slopTemp;					// prevents constant "seeking"
 EXTERN double 		maxDesired;					// highest allowed setting
 EXTERN double 		minDesired;					// lowest allowed setting
+EXTERN int			ecoMode;					// Eco Mode 
+EXTERN int			minEcoTemp;                 // Eco Mode minimum temperature
 EXTERN int			pumpOnDuration;				// seconds to run pump
 EXTERN int			pumpOffDuration;			// seconds to not run pump
 EXTERN int			filterOnDuration;			// seconds to run filter

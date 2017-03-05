@@ -1,8 +1,14 @@
-debug=0
+# enable debug mode logging
+#debug=1
+
+# ThingSpeakAPI
 ThingSpeakAPIkey=YOURAPIHERE
+
+# email info
 NoticeToAddress=youremail@blah.com
 NoticeFromAddress=youremail@blah.com
 MTA=smtp.yourserver.com
+
 #
 # 1-wire sensor IDs
 # uncomment and change to desired sensor ID, will use first ID found otherwise
@@ -23,6 +29,12 @@ maxHeaterTemp=135.0
 
 # how acurate to keep temperature. Too small a value and it will cycle a lot
 slopTemp=0.5
+
+# ecomode enabled
+#ecoMode=1
+
+# minimum outside temperature for eco mode
+#minEcoTemp=40
 
 # circulation pump cycle times
 pumpOnFor=15
