@@ -23,8 +23,8 @@
 #endif
  
 #define pumpPin 0
-#define heaterPin 2
-#define jetsPin 3
+#define heaterPin 3
+#define jetsPin 2
 #define socket1Pin 12
 #define socket2Pin 13
 #define socket3Pin 14
