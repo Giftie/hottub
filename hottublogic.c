@@ -429,11 +429,9 @@ void *HotTubLogic(void *param)
 				piLock(0);
 				digitalWrite(socket1Pin,0);
 				piUnlock(0);
-				PumpOn();
 				break;
 			case 1:
 				Log("HotTubLogic> Socket 1 On");
-				PumpOff();
 				piLock(0);
 				digitalWrite(socket1Pin,1);
 				piUnlock(0);
