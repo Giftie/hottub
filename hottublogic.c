@@ -408,7 +408,8 @@ void *HotTubLogic(void *param)
 				break;
 			case 1:
 				Log("HotTubLogic> Jets High");
-				PumpOff();
+				PumpOff(); // Turn low speed off
+				HeatOff(); // Turn heat off
 				piLock(0);
 				digitalWrite(jetsPin,1);
 				piUnlock(0);
