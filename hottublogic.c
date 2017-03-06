@@ -373,27 +373,34 @@ void *HotTubLogic(void *param)
 				}
 			}
 		}
-		
-		// turn on pump periodically
-		LogDbg("HotTubLogic> turn on pump periodically");
-		time(&now);
-		if (pumpIsOn)
+		// test for ecoMode and temperature
+		if ( (ecoMode) && (outsideTemp > minEcoTemp) )
 		{
-			if (difftime(now,pumpTurnedOnTime)>pumpOnDuration)
+			// turn on pump periodically
+			LogDbg("HotTubLogic> turn on pump periodically");
+			time(&now);
+			if (pumpIsOn)
 			{
-				// never turn off pump if heat is on
-				if (!heatIsOn)
-					PumpOff();
+				if (difftime(now,pumpTurnedOnTime)>pumpOnDuration)
+				{
+					// never turn off pump if heat is on
+					if (!heatIsOn)
+						PumpOff();
+				}
+			}
+			else
+			{
+				if (difftime(now,pumpTurnedOffTime) > pumpOffDuration)
+				{
+					PumpOn();
+				}
 			}
 		}
+	    // otherwise run pump 
 		else
 		{
-			if (difftime(now,pumpTurnedOffTime) > pumpOffDuration)
-			{
-				PumpOn();
-			}
+			PumpOn();
 		}
-		
 		// change jet level if needed
 		if (j1!=jetsLevel)
 		{
