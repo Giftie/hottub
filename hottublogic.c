@@ -374,7 +374,7 @@ void *HotTubLogic(void *param)
 			}
 		}
 		// test for ecoMode and temperature
-		if ( (ecoMode) && (outsideTemp > minEcoTemp) )
+		if ( (ecoMode) && (outdoorTemp > minEcoTemp) )
 		{
 			// turn on pump periodically
 			LogDbg("HotTubLogic> turn on pump periodically");
