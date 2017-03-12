@@ -123,26 +123,26 @@ void Command(int fd, char *cmdline)
 	if (!strcasecmp(cmd,"jets")) {
 		sendStr(fd,"OK\n");
 		close(fd);
-		if (jetsLevel==0)
+		if (jetsLevel)
 		{
-			jetsLevel = 1;
+			jetsLevel = 0;
 		}
 		else 
 		{
-			jetsLevel = 0;
+			jetsLevel = 1;
 		}
 		return;
 	}
 	if (!strcasecmp(cmd,"socket1")) {
 		sendStr(fd,"OK\n");
 		close(fd);
-		if (socket1Level==0)
+		if (socket1Level)
 		{
-			socket1Level = 1;
+			socket1Level = 0;
 		}
 		else 
 		{
-			socket1Level = 0;
+			socket1Level = 1;
 		}
 		return;
 	}
