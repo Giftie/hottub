@@ -123,13 +123,19 @@ void Command(int fd, char *cmdline)
 	if (!strcasecmp(cmd,"jets")) {
 		sendStr(fd,"OK\n");
 		close(fd);
-		jetsLevel = (jetsLevel+1) % 3;
+		if (jetsLevel==0)
+			jetsLevel = 1;
+		else 
+			jetsLevel = 0;
 		return;
 	}
 	if (!strcasecmp(cmd,"socket1")) {
 		sendStr(fd,"OK\n");
 		close(fd);
-		socket1Level = (socket1Level+1) % 3;
+		if (socket1Level==0)
+			socket1Level = 1;
+		else 
+			socket1Level = 0;
 		return;
 	}
 
