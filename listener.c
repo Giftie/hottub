@@ -198,13 +198,13 @@ void *HandleClient(void *param)
 	if (input[strlen(input)-1]<' ')
 		input[strlen(input)-1] = 0;
 
-	LogDbg("HandleClient Listener: got <%s>",input);
+	Log("HandleClient Listener: got <%s>",input);
 	// process command
 	Command(*fd, input);
 
 	SocketClose(*fd);
 	free(param);
-	LogDbg("HandleClient done");
+	Log("HandleClient done");
 	return;
 }
 
@@ -256,7 +256,7 @@ void *ListenerThread(void *param)
 		sin_size = sizeof(struct sockaddr_in);
 		new_fd = malloc(sizeof(int));
 		*new_fd = accept(sockfd,(struct sockaddr *)&clientaddr,&sin_size);
-		LogDbg("Listener> new connection from %s\n",inet_ntoa(clientaddr.sin_addr));
+		Log("Listener> new connection from %s\n",inet_ntoa(clientaddr.sin_addr));
 		// let a thread handle the commands
 		pthread_create(&tid, NULL, HandleClient, new_fd);
 		pthread_detach(tid);
