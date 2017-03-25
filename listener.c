@@ -50,7 +50,10 @@ void DoStatus(int fd)
 {
 	int		i;
 	char	buff[1000];
-
+	sprintf(buff,"%6.1f\n",outdoorTemp);
+	sendStr(fd,buff);
+	sprintf(buff,"%6.1f\n",equipmentTemp);
+	sendStr(fd,buff);
 	sprintf(buff,"%6.1f\n",currentTemp);
 	sendStr(fd,buff);
 	sprintf(buff,"%6.1f\n",desiredTemp);
@@ -61,8 +64,8 @@ void DoStatus(int fd)
 	sendStr(fd,buff);
 	sprintf(buff,"%s\n",pumpIsOn?"On":"Off");
 	sendStr(fd,buff);
-	sprintf(buff,"0\n");  // removed coverIsOpen flag
-	sendStr(fd,buff);
+	//sprintf(buff,"0\n");  // removed coverIsOpen flag
+	//sendStr(fd,buff);
 	sprintf(buff,"%s\n",jetlevel(jetsLevel));
 	sendStr(fd,buff);
 	sprintf(buff,"%s\n",jetlevel(socket1Level));
