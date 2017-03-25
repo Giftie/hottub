@@ -63,11 +63,11 @@ void DoStatus(int fd)
 	sendStr(fd,buff);
 	sprintf(buff,"0\n");  // removed coverIsOpen flag
 	sendStr(fd,buff);
-	sprintf(buff,"%s\n",failMessage);
-	sendStr(fd,buff);
 	sprintf(buff,"%s\n",jetlevel(jetsLevel));
 	sendStr(fd,buff);
 	sprintf(buff,"%s\n",jetlevel(socket1Level));
+	sendStr(fd,buff);
+	sprintf(buff,"%s\n",failMessage);
 	sendStr(fd,buff);
 	
 	sendStr(fd,"\n");
