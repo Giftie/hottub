@@ -13,6 +13,8 @@
 #include <sys/timeb.h>
 #include <pthread.h>
 #include <wiringPi.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
 
 #include "hottub.h"
 
@@ -66,7 +68,7 @@ int read_line(FILE *fp, char *bp, int mx)
 
 //************************************************************************
 // get var=value from config file
-int ReadConfigString(char *var, char *defaultVal, char *out, int sz, char *file)
+/* int ReadConfigString(char *var, char *defaultVal, char *out, int sz, char *file)
 {
 	FILE	*f;
 	char	line[100];
@@ -106,6 +108,66 @@ int ReadConfigString(char *var, char *defaultVal, char *out, int sz, char *file)
 	Log("ReadConfigString> return %s=%s",var,out);
 	piUnlock(1);
 	return 0;
+} */
+
+int ReadConfigString(char *var, char *defaultVal, char *out, int sz, char *file)
+{
+	xmlDoc *doc = NULL;
+    xmlNode *root = NULL;
+    xmlNode *cur_node, *child_node;
+    char *value;
+
+	LogDbg("ReadConfigString> get %s from %s ",var,file);
+	piLock(1);
+    LIBXML_TEST_VERSION
+
+    /*parse the file and get the DOM */
+    doc = xmlReadFile(file, NULL, 0);
+    if (doc == NULL) {
+        Log("error: could not parse file %s\n", file);
+	    piUnlock(1);
+		return 1;
+    }
+	
+    /*Get the root element node */
+    root = xmlDocGetRootElement(doc);
+    if (!root || !root->name || xmlStrcmp(root->name,"settings")) {
+        xmlFreeDoc(doc);
+        return(0);
+    }
+    for(cur_node = root->children; cur_node != NULL; cur_node = cur_node->next) {
+        if ( cur_node->type == XML_ELEMENT_NODE ) {
+            if ( !strcmp(cur_node->name,var) ) {
+				Log("ReadConfigString> read: %s \n",cur_node->name);
+                value = xmlNodeGetContent(cur_node);
+                if (value) {
+					Log("ReadConfigString> value: %s \n",value);
+					strncpy(out,value,sz);
+				    xmlFreeDoc(doc);
+                    xmlCleanupParser();
+					piUnlock(1);
+					return 1;
+				}
+				else if (!value && defaultVal) {
+					Log("ReadConfigString> using Default value: %s \n",defaultVal);
+					strncpy(out,defaultVal,sz);
+					Log("ReadConfigString> return %s=%s",var,out);
+				    xmlFreeDoc(doc);
+                    xmlCleanupParser();
+					piUnlock(1);
+					return 0;
+				}
+				else {
+					strncpy(out,defaultVal,sz);
+					Log("ReadConfigString> return %s=%s",var,out);
+				    xmlFreeDoc(doc);
+                    xmlCleanupParser();
+					piUnlock(1);
+					return 0;
+				}
+			}
+		}
+	}
 }
 
 //************************************************************************

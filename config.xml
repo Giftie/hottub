@@ -1,0 +1,33 @@
+<settings># enable debug mode logging
+	<!-- debug mode,, 1 - enabled, 0 - disabled -->
+	<debug>1</debug>
+    <ThingSpeakAPIkey>YOURAPIHERE</ThingSpeakAPIkey>
+	<!-- eMail -->
+	<NoticeToAddress>youremail@blah.com</NoticeToAddress>
+    <NoticeFromAddress>youremail@blah.com</NoticeFromAddress>
+	<MTA>smtp.yourserver.com</MTA>
+	<!-- 1-wire sensor IDs -->
+    <waterSensorID></waterSensorID>
+	<heaterSensorID></heaterSensorID>
+	<outdoorSensorID></outdoorSensorID>
+	<equipSensorID></equipSensorID>
+	<!-- Minimum equipment temperature to issue email warning for Freezing -->
+	<minEquipmentTemp>40</minEquipmentTemp>
+	<!-- allowed temperature range -->
+	<maxDesired>109.5</maxDesired>
+	<minDesired>100.5</minDesired>
+	<!-- over temp shutdown for heater temp -->
+	<maxHeaterTemp>135.0</maxHeaterTemp>
+	<!-- how acurate to keep temperature. Too small a value and it will cycle a lot -->
+	<slopTemp>0.5</slopTemp>
+	<!-- ecomode, 1 - enabled, 0 - disabled -->
+	<ecoMode>1</ecoMode>
+	<!-- minimum outside temperature for eco mode -->
+	<minEcoTemp>40</minEcoTemp>
+	<!-- circulation pump cycle times -->
+	<pumpOnFor>15</pumpOnFor>
+	<pumpOffFor>45</pumpOffFor>
+	<!-- jets(filter) cycle time -->
+	<filterOnFor>30</filterOnFor>
+	<filterOffFor>720</filterOffFor>
+</settings>
