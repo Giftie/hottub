@@ -486,10 +486,10 @@ void *HotTubLogic(void *param)
 	HeatOff();
 	PumpOff();
 	piLock(0);
-	digitalWrite(jetsPin,0);
-	digitalWrite(socket1Pin,0);
-	digitalWrite(socket2Pin,0);
-	digitalWrite(socket3Pin,0);
+	digitalWrite(jetsPin,1);
+	digitalWrite(socket1Pin,1);
+	digitalWrite(socket2Pin,1);
+	digitalWrite(socket3Pin,1);
 	digitalWrite(jetsLedPin,0);
 	digitalWrite(socket1LedPin,0);
 	piUnlock(0);
